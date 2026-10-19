@@ -69,7 +69,12 @@ public static class MatrixTool
         return bareI.WithElement(targetRowIndex, sourceRowIndex, scalar);
     }
 
-    public static Matrix Ref(Matrix m)
+    /// <summary>
+    /// 将给定矩阵化为行阶梯型（REF）。
+    /// </summary>
+    /// <param name="m">给定矩阵。</param>
+    /// <param name="maxRowNumToProc">最大处理行数，设为0则无限制。</param>
+    public static Matrix Ref(Matrix m, ulong maxRowNumToProc = 0)
     {
         Matrix currentM = m;
         ulong fineRows = 0;
@@ -77,6 +82,9 @@ public static class MatrixTool
         // 逐列处理
         for (ulong column = 0; column < m.ColumnCount; column++)
         {
+            if (maxRowNumToProc != 0 && fineRows == maxRowNumToProc)
+                return currentM;
+
             // 非零行下标集
             List<ulong> nonZeroRowIndices = new List<ulong>();
 
