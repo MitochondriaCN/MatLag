@@ -80,6 +80,19 @@ public class Matrix
         return _elements[row, column];
     }
 
+    public Matrix WithElement(ulong row, ulong column, double value)
+    {
+        if (row >= RowCount || column >= ColumnCount)
+        {
+            throw new ArgumentOutOfRangeException(row >= RowCount ? nameof(row) : nameof(column));
+        }
+
+        double[,] newElements = (double[,])_elements.Clone();
+        newElements[row, column] = value;
+
+        return new Matrix(newElements);
+    }
+
     public static Matrix operator +(Matrix m1, Matrix m2)
     {
         if (m1.RowCount != m2.RowCount || m1.ColumnCount != m2.ColumnCount)
