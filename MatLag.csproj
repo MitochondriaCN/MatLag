@@ -9,4 +9,9 @@
         <InvariantGlobalization>true</InvariantGlobalization>
     </PropertyGroup>
 
+    <ItemGroup>
+        <Compile Remove="Domain/**/*.cs;Web/**/*.cs" />
+        <ProjectReference Include="Domain/MatLag.Domain.csproj" />
+    </ItemGroup>
+
 </Project>

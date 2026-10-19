@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MatLag · 矩阵消元实验室</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23087d70'/%3E%3Ctext x='5' y='24' fill='white' font-size='24' font-family='sans-serif'%3EM%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <main>
+    <header><a class="brand" href="/">M<span>∕</span> MatLag</a><span class="badge">线性代数 · 可视化实验室</span></header>
+    <section class="intro"><p class="eyebrow">从数字，到阶梯。</p><h1>让矩阵消元，<span>一步步看得见。</span></h1><p>填入矩阵，观察主元与行的变化。不需要写代码。</p></section>
+    <div id="message" role="status" aria-live="polite">已载入换行示例，可以直接开始演示。</div>
+    <div class="workspace">
+      <section class="panel">
+        <div class="panel-title"><h2><span class="number">01</span> 输入矩阵</h2><span id="dimensions" class="muted"></span></div>
+        <fieldset id="editor">
+          <div class="toolbar"><label>行 <input id="rows" type="number" min="1" max="32" value="3"></label><span class="muted">×</span><label>列 <input id="columns" type="number" min="1" max="32" value="4"></label><button id="resize">调整大小</button></div>
+          <div class="toolbar presets"><select id="example" aria-label="选择示例"><option value="swap">换行与零行 · 3×4</option><option value="ordinary">普通消元 · 3×4</option><option value="dependent">零列与相关行 · 5×7</option></select><button id="load">载入示例</button><button id="random">随机填充</button><button id="clear">清空</button></div>
+          <div class="matrix-scroll"><div id="input-grid" class="matrix input-matrix" aria-label="输入矩阵"></div></div>
+          <p class="hint">直接填数字，Tab 切换。支持从 Excel 粘贴；整块粘贴会从当前格开始，并自动扩展矩阵。空白按 0 处理。</p>
+          <div class="actions"><button id="calculate" class="primary">开始演示 <span>→</span></button><button id="finish">直接完成</button></div>
+        </fieldset>
+        <p class="limits">分步演示 ≤ 10×10 · 直接完成 ≤ 32×32</p>
+      </section>
+      <section class="panel result-panel">
+        <div class="panel-title"><h2><span class="number">02</span> 消元过程</h2><label class="precision">有效数字 <select id="precision"><option value="4">4 位</option><option value="6" selected>6 位</option><option value="10">10 位</option></select></label></div>
+        <div id="empty" class="empty"><span class="empty-icon">[ ↗ ]</span><h3>下一步，见证变化</h3><p>填好左侧矩阵，点击「开始演示」。<br>每一步完成一个主元及其下方消元。</p></div>
+        <div id="result" hidden>
+          <div class="result-caption"><span id="step-label"></span><span id="time" class="muted"></span></div>
+          <div class="matrix-scroll"><div id="output-grid" class="matrix output-matrix" aria-label="当前消元结果"></div></div>
+          <div class="legend"><span class="dot pivot-dot"></span> 本步主元行 <span class="dot change-dot"></span> 本步变化</div>
+          <div class="playback"><button id="previous" aria-label="上一步">← 上一步</button><button id="play">自动播放</button><button id="next" aria-label="下一步">下一步 →</button><button id="reset">回到原矩阵</button></div>
+          <input id="step-slider" type="range" min="0" max="0" value="0" aria-label="消元步骤">
+          <p id="summary" class="hint"></p>
+          <p class="hint">悬停或聚焦结果数字可查看完整值。|值| &lt; 10⁻¹⁰ 的非零数显示为 ≈0，仅影响显示。</p>
+        </div>
+      </section>
+    </div>
+    <footer>MatLag / 每一次运算都值得等待。<span>由现有 C# Domain 计算驱动</span></footer>
+  </main>
+</body>
+</html>
